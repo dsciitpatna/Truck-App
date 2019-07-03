@@ -1,3 +1,6 @@
+plugins{
+    id("com.diffplug.gradle.spotless") version "3.23.1"
+}
 apply plugin: 'com.android.application'
 
 android {
@@ -15,6 +18,14 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+}
+
+spotless {
+    java {
+        // ...
+        target '**/*.java'
+        // ...
     }
 }
 
