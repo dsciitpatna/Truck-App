@@ -4,5 +4,5 @@ php:
   - 7.3
 script:
   - echo "testing purpose"
-  - echo yes | ${ANDROID_HOME}/tools/bin/sdkmanager "platforms;android-28"
+  - ./gradlew spotlessApply
   
