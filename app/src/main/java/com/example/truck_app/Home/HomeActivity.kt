@@ -13,12 +13,11 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
-class HomeActivity : AppCompatActivity(), IHomeView, OnMapReadyCallback {
+class HomeActivity : AppCompatActivity(), IHomeView {
 
 
     private lateinit var homePresenter: IHomePresenter
     private lateinit var map: GoogleMap
-    private lateinit var mapFragment: SupportMapFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,33 +25,23 @@ class HomeActivity : AppCompatActivity(), IHomeView, OnMapReadyCallback {
         homePresenter = HomePresenter(this)
         homePresenter.onAttach(this)
 
-       // val mapReadyCallback = MapReadyCallback()
+        val mapReadyCallback = MapReadyCallback()
 
-        //mapFragment = supportFragmentManager.findFragmentById(R.id.show_map) as SupportMapFragment
-        //mapFragment.getMapAsync(mapReadyCallback)
-
-       val  mapFragment=(supportFragmentManager.findFragmentById(R.id.show_map) as SupportMapFragment?)?.let {
-            it.getMapAsync(this)
+        val mapFragment = (supportFragmentManager.findFragmentById(R.id.show_map) as SupportMapFragment?)?.let {
+            it.getMapAsync(mapReadyCallback)
         }
     }
 
-//    internal inner class MapReadyCallback: OnMapReadyCallback{
-//        override fun onMapReady(googleMap: GoogleMap?) {
-//            map = googleMap as GoogleMap
-//
-//            // Add a marker in Sydney and move the camera
-//            val sydney = LatLng(-34.0, 151.0)
-//            map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-//            map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
-//        }
-//
-//    }
+    internal inner class MapReadyCallback : OnMapReadyCallback {
+        override fun onMapReady(googleMap: GoogleMap?) {
+            map = googleMap as GoogleMap
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        map = googleMap
-        val sydney = LatLng(-34.0, 151.0)
-        map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+            // Add a marker in Sydney and move the camera
+            val sydney = LatLng(-34.0, 151.0)
+            map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+            map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        }
+
     }
 
 }
