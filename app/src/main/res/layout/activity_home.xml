@@ -6,11 +6,12 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/data_entry"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_medium"
         android:orientation="vertical"
-        tools:context=".HomeActivity">
+        tools:context=".Home.HomeActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -121,6 +122,20 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/select_choice"
+        android:layout_below="@id/data_entry">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/show_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/select_choice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
