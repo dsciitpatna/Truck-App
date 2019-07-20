@@ -31,7 +31,6 @@ class MainPresenter(context: Context):IMainPresenter {
         if (counter > 0) {
             mainView.askForPermission(permissionsGranted)
         }
-        Log.d("KHANKI","Executed")
     }
 
     override fun onDetach() {

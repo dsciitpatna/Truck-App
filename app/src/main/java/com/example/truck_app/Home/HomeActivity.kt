@@ -2,46 +2,90 @@ package com.example.truck_app.Home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import com.example.truck_app.Home.contract.IHomePresenter
 import com.example.truck_app.Home.contract.IHomeView
 import com.example.truck_app.R
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
+import com.example.truck_app.helper.Constant
+import com.example.truck_app.helper.LocationHelper
+import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 
 class HomeActivity : AppCompatActivity(), IHomeView {
 
-
     private lateinit var homePresenter: IHomePresenter
     private lateinit var map: GoogleMap
+    private lateinit var locationHelper: LocationHelper
+    var latitude: Double = 0.0
+    var longitude: Double = 0.0
+    private var source = Constant.IP
+    private lateinit var mapView: MapView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         homePresenter = HomePresenter(this)
         homePresenter.onAttach(this)
+        setUp()
 
-        val mapReadyCallback = MapReadyCallback()
-
-        val mapFragment = (supportFragmentManager.findFragmentById(R.id.show_map) as SupportMapFragment?)?.let {
-            it.getMapAsync(mapReadyCallback)
-        }
     }
 
-    internal inner class MapReadyCallback : OnMapReadyCallback {
-        override fun onMapReady(googleMap: GoogleMap?) {
-            map = googleMap as GoogleMap
-
-            // Add a marker in Sydney and move the camera
-            val sydney = LatLng(-34.0, 151.0)
-            map.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-            map.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    override fun setUp() {
+        mapView = findViewById(R.id.show_map)
+        getLocation()
+        with(mapView) {
+            onCreate(null)
+            getMapAsync{
+                MapsInitializer.initialize(applicationContext)
+                setMapLocation(it)
+            }
         }
 
     }
 
+    override fun setMapLocation(map: GoogleMap) {
+        with(map) {
+            val position = LatLng(latitude, longitude)
+            moveCamera(CameraUpdateFactory.newLatLngZoom(position, 13f))
+            addMarker(MarkerOptions().position(position))
+            mapType = GoogleMap.MAP_TYPE_NORMAL
+            setOnMapClickListener {
+                Toast.makeText(baseContext, "Clicked on map", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun getLocation() {
+        locationHelper = LocationHelper(this)
+        locationHelper.getLocation()
+        if (locationHelper.canGetLocation()) {
+            latitude = locationHelper.latitude
+            longitude = locationHelper.longitude
+            source = locationHelper.source
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapView.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapView.onLowMemory()
+    }
 }
