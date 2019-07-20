@@ -7,10 +7,17 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_my_bookings">My Bookings</string>
+    <string name="menu_rate_chart">Rate Chart</string>
+    <string name="menu_settings">Settings</string>
+    <string name="menu_help">Help</string>
+    <string name="menu_rate_us">Rate us</string>
+    <string name="menu_about">About</string>
+
+    <!--Home Page-->
+    <string name="home_pickup_from">Pickup from</string>
+    <string name="home_location">Select a Location</string>
+    <string name="home_drop_at">Drop at</string>
+    <string name="home_book_for_now">Book for now</string>
+    <string name="home_book_for_later">Book for later</string>
 </resources>

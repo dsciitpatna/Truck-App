@@ -3,4 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
+
+    <!--Home Page-->
+    <color name="pickup_location_color">#4CCF17</color>
+    <color name="drop_location_color">#EF0f0A</color>
 </resources>
+
