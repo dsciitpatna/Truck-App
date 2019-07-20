@@ -12,6 +12,7 @@ import com.example.truck_app.helper.LocationHelper
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_home.*
 
 
 class HomeActivity : AppCompatActivity(), IHomeView {
@@ -38,7 +39,7 @@ class HomeActivity : AppCompatActivity(), IHomeView {
         getLocation()
         with(mapView) {
             onCreate(null)
-            getMapAsync{
+            getMapAsync {
                 MapsInitializer.initialize(applicationContext)
                 setMapLocation(it)
             }
@@ -52,10 +53,19 @@ class HomeActivity : AppCompatActivity(), IHomeView {
             moveCamera(CameraUpdateFactory.newLatLngZoom(position, 13f))
             addMarker(MarkerOptions().position(position))
             mapType = GoogleMap.MAP_TYPE_NORMAL
+            val place = homePresenter.getPlaceName(latitude, longitude)
+            setPickUpLocation(place)
             setOnMapClickListener {
-                Toast.makeText(baseContext, "Clicked on map", Toast.LENGTH_SHORT).show()
+                latitude = map.cameraPosition.target.latitude
+                longitude = map.cameraPosition.target.longitude
+                clear()
+                setMapLocation(map)
             }
         }
+    }
+
+    override fun setPickUpLocation(place: String?) {
+        pick_up_from.text = place
     }
 
     override fun getLocation() {

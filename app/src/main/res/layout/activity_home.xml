@@ -60,6 +60,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/home_location"
+                        android:id="@+id/pick_up_from"
                         android:textColor="@color/black"
                         android:textSize="@dimen/home_pickup_drop_location_textsize" />
                 </LinearLayout>
