@@ -47,9 +47,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
         navigationView.setNavigationItemSelectedListener(this)
 
+         initialSetup()
+
     }
 
     override fun initialSetup() {
+
+        mainPresenter.getPermissions()
 
         home_buttom.setOnClickListener {
             startActivity(Intent(this, HomeActivity::class.java))
@@ -113,5 +117,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         drawer.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mainPresenter.onDetach()
     }
 }
