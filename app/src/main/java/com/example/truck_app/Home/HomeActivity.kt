@@ -2,17 +2,19 @@ package com.example.truck_app.Home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import com.example.truck_app.Home.contract.IHomePresenter
 import com.example.truck_app.Home.contract.IHomeView
 import com.example.truck_app.R
 import com.example.truck_app.helper.Constant
 import com.example.truck_app.helper.LocationHelper
-import com.google.android.gms.maps.*
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.MapView
+import com.google.android.gms.maps.MapsInitializer
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.activity_home.relocate
+import kotlinx.android.synthetic.main.activity_home.pick_up_from
 
 
 class HomeActivity : AppCompatActivity(), IHomeView {
@@ -30,6 +32,7 @@ class HomeActivity : AppCompatActivity(), IHomeView {
         setContentView(R.layout.activity_home)
         homePresenter = HomePresenter(this)
         homePresenter.onAttach(this)
+        locationHelper = LocationHelper(this)
         setUp()
 
     }
@@ -45,10 +48,17 @@ class HomeActivity : AppCompatActivity(), IHomeView {
             }
         }
 
+        relocate.setOnClickListener {
+            getLocation()
+            setMapLocation(map)
+        }
+
     }
 
-    override fun setMapLocation(map: GoogleMap) {
-        with(map) {
+    override fun setMapLocation(maps: GoogleMap) {
+        with(maps) {
+            clear()
+            map = maps
             val position = LatLng(latitude, longitude)
             moveCamera(CameraUpdateFactory.newLatLngZoom(position, 13f))
             addMarker(MarkerOptions().position(position))
@@ -58,7 +68,6 @@ class HomeActivity : AppCompatActivity(), IHomeView {
             setOnMapClickListener {
                 latitude = map.cameraPosition.target.latitude
                 longitude = map.cameraPosition.target.longitude
-                clear()
                 setMapLocation(map)
             }
         }
@@ -69,7 +78,6 @@ class HomeActivity : AppCompatActivity(), IHomeView {
     }
 
     override fun getLocation() {
-        locationHelper = LocationHelper(this)
         locationHelper.getLocation()
         if (locationHelper.canGetLocation()) {
             latitude = locationHelper.latitude
