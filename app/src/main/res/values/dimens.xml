@@ -24,4 +24,10 @@
     <dimen name="home_pickup_drop_cardview_margin">4dp</dimen>
     <dimen name="home_pickup_drop_circle_dimen">8dp</dimen>
     <dimen name="home_button_margin">4dp</dimen>
+    <dimen name="home_recenter_button_margin">64dp</dimen>
+
+    <!--Login Signup Page-->
+    <dimen name="login_signup_logo_dimen">100dp</dimen>
+    <dimen name="login_signup_header_textsize">32sp</dimen>
+    <dimen name="signup_margin_bottom">48dp</dimen>
 </resources>
