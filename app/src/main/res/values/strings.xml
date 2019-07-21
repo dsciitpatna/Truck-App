@@ -20,4 +20,18 @@
     <string name="home_drop_at">Drop at</string>
     <string name="home_book_for_now">Book for now</string>
     <string name="home_book_for_later">Book for later</string>
+
+    <!--Login Signup Page-->
+    <string name="signup_already_registered">Already Registered?\u0020</string>
+    <string name="signup_open_login"><u>Login</u></string>
+    <string name="login_no_account">Don\'t have an Account?\u0020</string>
+    <string name="login_open_signup"><u>Sign Up</u></string>
+    <string name="login_forgot_password"><u>Forgot Password</u>\?</string>
+    <string name="login_caps">LOGIN</string>
+    <string name="signup_caps">SIGN UP</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="mobile">Mobile</string>
+    <string name="confirm_password">Confirm Password</string>
 </resources>

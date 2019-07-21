@@ -6,9 +6,15 @@
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="transparent">#00FFFFFF</color>
 
     <!--Home Page-->
     <color name="pickup_location_color">#4CCF17</color>
     <color name="drop_location_color">#EF0f0A</color>
+
+    <!--Login Signup Page-->
+    <color name="login_signup_dark_background">#44000000</color>
+    <color name="login_signup_edittext_background">#88000000</color>
+    <color name="login_signup_details_textcolor">#CCCCCC</color>
 </resources>
 

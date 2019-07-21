@@ -5,6 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/show_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/relocate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/home_recenter_button_margin"
+            android:backgroundTint="@color/transparent"
+            android:src="@drawable/ic_my_location_black_24dp" />
+
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/data_entry"
         android:layout_width="match_parent"
@@ -57,10 +79,10 @@
                         android:textSize="@dimen/home_pickup_drop_header_textsize" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/pick_up_from"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/home_location"
-                        android:id="@+id/pick_up_from"
                         android:textColor="@color/black"
                         android:textSize="@dimen/home_pickup_drop_location_textsize" />
                 </LinearLayout>
@@ -121,29 +143,6 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
     </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/select_choice"
-        android:layout_below="@id/data_entry">
-
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/show_map"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_my_location_black_24dp"
-            android:layout_alignBottom="@id/show_map"
-            android:layout_alignRight="@id/show_map"
-            android:layout_marginBottom="@dimen/margin_medium"
-            android:layout_marginRight="@dimen/margin_medium"
-            android:id="@+id/relocate"/>
-
-    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/select_choice"
